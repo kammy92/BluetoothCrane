@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_margin">
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingBottom="@dimen/activity_margin_extra_small"
+        android:paddingTop="@dimen/activity_margin_extra_small"
+        android:text="Karman Singh"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/text_size_small"/>
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvName"
+        android:layout_marginLeft="@dimen/activity_margin_small"
+        android:layout_marginStart="@dimen/activity_margin_small"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="Developer"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/text_size_extra_small"/>
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAddress"
+        android:layout_marginLeft="@dimen/activity_margin_small"
+        android:layout_marginStart="@dimen/activity_margin_small"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="Paired"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/text_size_extra_small"/>
+</RelativeLayout>
