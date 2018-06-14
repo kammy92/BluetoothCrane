@@ -32,7 +32,7 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
     private final UUID PORT_UUID = UUID.fromString ("00001101-0000-1000-8000-00805f9b34fb");
     
-    private BluetoothDevice device;
+    
     private BluetoothSocket socket;
     private OutputStream outputStream;
     
@@ -40,14 +40,16 @@ public class MainActivity extends AppCompatActivity {
     
     TextView tvConnect;
     
-    String command; //string variable that will store value to be transmitted to the bluetooth module
-    
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
-        
+        initView ();
+        initData ();
+        initListener ();
+    }
+    
+    private void initView () {
         tv1 = (TextView) findViewById (R.id.tv1);
         tv2 = (TextView) findViewById (R.id.tv2);
         tv3 = (TextView) findViewById (R.id.tv3);
@@ -61,10 +63,14 @@ public class MainActivity extends AppCompatActivity {
         tv11 = (TextView) findViewById (R.id.tv11);
         tv12 = (TextView) findViewById (R.id.tv12);
         tvConnect = (TextView) findViewById (R.id.tvConnect);
-        
-        BTInitialization ();
-        
-        
+    }
+    
+    private void initData () {
+        initBluetooth ();
+    }
+    
+    @SuppressLint("ClickableViewAccessibility")
+    private void initListener () {
         tv1.setOnTouchListener (new View.OnTouchListener () {
             @Override
             public boolean onTouch (View v, MotionEvent event) {
@@ -76,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        
         
         tv2.setOnTouchListener (new View.OnTouchListener () {
             @Override
@@ -209,32 +214,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-    
-    
-/*
-        //OnTouchListener code for the reverse button (button long press)
-        reverse_btn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    command = "2";
-                    try {
-                        outputStream.write(command.getBytes());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    command = "10";
-                    try {
-                        outputStream.write(command.getBytes());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });
-*/
         
         tvConnect.setOnClickListener (new View.OnClickListener () {
             @Override
@@ -258,10 +237,8 @@ public class MainActivity extends AppCompatActivity {
                                 .onPositive (new MaterialDialog.SingleButtonCallback () {
                                     @Override
                                     public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        device = bluetoothDevice;
-                                        Log.e ("karman", device.getName ());
-                                        Log.e ("karman", device.getAddress ());
-                                        connect (bluetoothDevice, PORT_UUID);
+                                        Utils.showLog (Log.ERROR, "karman", "Name : " + bluetoothDevice.getName () + ", Address : " + bluetoothDevice.getAddress (), false);
+                                        startConnection (bluetoothDevice);
                                     }
                                 }).build ();
                         dialog.show ();
@@ -272,27 +249,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 fragment.show (ft, AppConfigTags.DEVICES);
-
-//                if (BTInitialization()) {
-//                    BTConnect();
-//                }
             }
         });
-        
     }
     
-    public void BTInitialization () {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter ();
-        
-        //Checks if the device supports bluetooth
-        if (bluetoothAdapter == null) {
-            Utils.showToast (this, "Device doesn't support bluetooth", false);
-        }
-        
-        //Checks if bluetooth is enabled. If not, the program will ask permission from the user to enable it
-        if (! bluetoothAdapter.isEnabled ()) {
-            Intent enableAdapter = new Intent (BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult (enableAdapter, 0);
+    public void initBluetooth () {
+        try {
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter ();
+            //Checks if the device supports bluetooth
+            if (bluetoothAdapter == null) {
+                Utils.showToast (this, "Device doesn't support bluetooth", false);
+            }
+            //Checks if bluetooth is enabled. If not, the program will ask permission from the user to enable it
+            if (! bluetoothAdapter.isEnabled ()) {
+                startActivityForResult (new Intent (BluetoothAdapter.ACTION_REQUEST_ENABLE), 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace ();
         }
     }
     
@@ -300,63 +273,47 @@ public class MainActivity extends AppCompatActivity {
         try {
             ByteArrayOutputStream output = new ByteArrayOutputStream (4);
             output.write (data);
-            OutputStream outputStream = socket.getOutputStream ();
             outputStream.write (output.toByteArray ());
         } catch (IOException e) {
             e.printStackTrace ();
         }
     }
     
-    public int receiveData () throws IOException {
-        byte[] buffer = new byte[4];
-        ByteArrayInputStream input = new ByteArrayInputStream (buffer);
-        InputStream inputStream = socket.getInputStream ();
-        inputStream.read (buffer);
-        return input.read ();
+    public int receiveData () {
+        try {
+            byte[] buffer = new byte[4];
+            ByteArrayInputStream input = new ByteArrayInputStream (buffer);
+            InputStream inputStream = socket.getInputStream ();
+            inputStream.read (buffer);
+            return input.read ();
+        } catch (IOException e) {
+            e.printStackTrace ();
+            return 0;
+        }
     }
     
-    public boolean connect (BluetoothDevice bTDevice, UUID mUUID) {
+    public void startConnection (BluetoothDevice device) {
         try {
-            socket = bTDevice.createRfcommSocketToServiceRecord (mUUID);
-        } catch (IOException e) {
-            Log.e ("karman", "Could not create RFCOMM socket:" + e.toString ());
-            return false;
-        }
-        try {
+            socket = device.createRfcommSocketToServiceRecord (PORT_UUID);
             socket.connect ();
-        } catch (IOException e) {
-            Log.e ("karman", "Could not connect: " + e.toString ());
-            try {
-                socket.close ();
-            } catch (IOException close) {
-                Log.e ("karman", "Could not close connection:" + e.toString ());
-                return false;
-            }
-        }
-        
-        try {
-            //gets the output stream of the socket
             outputStream = socket.getOutputStream ();
         } catch (IOException e) {
             e.printStackTrace ();
+            Utils.showLog (Log.ERROR, "karman", "Could not connect : " + e.toString (), true);
         }
-        
-        return true;
     }
     
-    public boolean cancel () {
+    public void closeConnection () {
         try {
             socket.close ();
         } catch (IOException e) {
-            Log.d ("karman", "Could not close connection:" + e.toString ());
-            return false;
+            Utils.showLog (Log.ERROR, "karman", "Could not close connection:" + e.toString (), true);
         }
-        return true;
     }
     
     @Override
     public void onDestroy () {
         super.onDestroy ();
-        cancel ();
+        closeConnection ();
     }
 }
