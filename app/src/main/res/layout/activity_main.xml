@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_margin"
@@ -7,68 +8,194 @@
     android:paddingRight="@dimen/activity_margin"
     android:paddingTop="@dimen/activity_margin">
 
-    <Button
-        android:id="@+id/forward_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="74dp"
-        android:layout_toLeftOf="@+id/forward_right_btn"
-        android:layout_toStartOf="@+id/forward_right_btn"
-        android:text="Forward" />
 
-    <Button
-        android:id="@+id/forward_left_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_below="@+id/forward_btn"
-        android:layout_toLeftOf="@+id/forward_btn"
-        android:layout_toStartOf="@+id/forward_btn"
-        android:text="forward&#10;LEFT" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4.0">
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:orientation="horizontal"
+            android:weightSum="4.0">
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv6"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="6"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv8"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:orientation="horizontal"
+            android:weightSum="4.0">
+            <TextView
+                android:id="@+id/tv9"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="9"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv10"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="10"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv11"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_marginRight="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="11"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv12"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/activity_margin_small"
+                android:layout_weight="1.0"
+                android:background="@drawable/bt_background"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/forward_right_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_above="@+id/reverse_btn"
-        android:layout_toEndOf="@+id/reverse_btn"
-        android:layout_toRightOf="@+id/reverse_btn"
-        android:text="forward&#10;RIGHT" />
-
-    <Button
-        android:id="@+id/reverse_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_below="@+id/forward_left_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:text="REVERSE" />
-
-    <Button
-        android:id="@+id/reverse_left_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_alignLeft="@+id/forward_left_btn"
-        android:layout_alignStart="@+id/forward_left_btn"
-        android:layout_below="@+id/forward_left_btn"
-        android:layout_centerHorizontal="true"
-        android:text="Reverse&#10;Left" />
-
-    <Button
-        android:id="@+id/reverse_right_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_alignEnd="@+id/forward_right_btn"
-        android:layout_alignRight="@+id/forward_right_btn"
-        android:layout_below="@+id/forward_right_btn"
-        android:layout_toRightOf="@+id/reverse_btn"
-        android:text="Reverse&#10;Right" />
-
-    <Button
-        android:id="@+id/bluetooth_connect_btn"
+    <TextView
+        android:id="@+id/tvConnect"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:background="@drawable/bt_background"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Connect to Bluetooth Device" />
+        android:gravity="center"
+        android:padding="@dimen/activity_margin"
+        android:text="CONNECT TO BLUETOOTH DEVICE"
+        android:textColor="#ffffff"
+        android:textStyle="bold"/>
 </RelativeLayout>
