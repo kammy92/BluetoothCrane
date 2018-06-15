@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
     
     private void initData () {
         initBluetooth ();
+    
+        if (getPackageManager ().hasSystemFeature (PackageManager.FEATURE_BLUETOOTH_LE)) {
+            Log.e ("karman", "supported");
+            // BLE is supported, we can use BLE API
+        } else {
+            Log.e ("karman", "not supported");
+            // BLE is not supported, Don’t use BLE capabilities here
+        }
     }
     
     @SuppressLint("ClickableViewAccessibility")
@@ -222,10 +231,10 @@ public class MainActivity extends AppCompatActivity {
                 DeviceListDialogFragment fragment = DeviceListDialogFragment.newInstance ();
                 fragment.setOnDialogResultListener (new DeviceListDialogFragment.OnDialogResultListener () {
                     @Override
-                    public void onPositiveResult (final BluetoothDevice bluetoothDevice, final String name, String address) {
+                    public void onPositiveResult (final BluetoothDevice bluetoothDevice) {
                         Utils.hideSoftKeyboard (MainActivity.this);
                         MaterialDialog dialog = new MaterialDialog.Builder (MainActivity.this)
-                                .content ("Do you wish to connect to  " + name + "?")
+                                .content ("Do you wish to connect to  " + bluetoothDevice.getName () + "?")
                                 .positiveColor (getResources ().getColor (R.color.primary_text))
                                 .contentColor (getResources ().getColor (R.color.primary_text))
                                 .negativeColor (getResources ().getColor (R.color.primary_text))
@@ -274,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             ByteArrayOutputStream output = new ByteArrayOutputStream (4);
             output.write (data);
             outputStream.write (output.toByteArray ());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace ();
         }
     }

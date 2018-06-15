@@ -3,57 +3,67 @@ package com.karman.bluetoothcrane.model;
 import android.bluetooth.BluetoothDevice;
 
 public class Device {
+    private BluetoothDevice bluetoothDevice;
     private String name;
     private String address;
-    private boolean connected;
-    private BluetoothDevice bluetoothDevice;
-    private String type;
-
-    public Device(BluetoothDevice bluetoothDevice, String name, String address, String type,boolean connected) {
+    private int state;
+    private int type;
+    private int rssi;
+    
+    public Device (BluetoothDevice bluetoothDevice, String name, String address, int state, int type, int rssi) {
         this.bluetoothDevice = bluetoothDevice;
         this.name = name;
         this.address = address;
+        this.state = state;
         this.type = type;
-        this.connected = connected;
+        this.rssi = rssi;
     }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public BluetoothDevice getBluetoothDevice() {
+    
+    public BluetoothDevice getBluetoothDevice () {
         return bluetoothDevice;
     }
-
-    public void setBluetoothDevice(BluetoothDevice bluetoothDevice) {
+    
+    public void setBluetoothDevice (BluetoothDevice bluetoothDevice) {
         this.bluetoothDevice = bluetoothDevice;
     }
-
-    public String getName() {
+    
+    public String getName () {
         return name;
     }
-
-    public void setName(String name) {
+    
+    public void setName (String name) {
         this.name = name;
     }
-
-    public String getAddress() {
+    
+    public String getAddress () {
         return address;
     }
-
-    public void setAddress(String address) {
+    
+    public void setAddress (String address) {
         this.address = address;
     }
-
-    public boolean isConnected() {
-        return connected;
+    
+    public int getState () {
+        return state;
     }
-
-    public void setConnected(boolean connected) {
-        this.connected = connected;
+    
+    public void setState (int state) {
+        this.state = state;
+    }
+    
+    public int getType () {
+        return type;
+    }
+    
+    public void setType (int type) {
+        this.type = type;
+    }
+    
+    public int getRssi () {
+        return rssi;
+    }
+    
+    public void setRssi (int rssi) {
+        this.rssi = rssi;
     }
 }

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import com.karman.bluetoothcrane.R;
 import com.karman.bluetoothcrane.model.Device;
 import com.karman.bluetoothcrane.utils.Utils;
@@ -39,7 +38,17 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         Utils.setTypefaceToAllViews (activity, holder.tvName);
         holder.tvName.setText (device.getName ());
         holder.tvAddress.setText (device.getAddress());
-        holder.tvType.setText (device.getType());
+        switch (device.getType ()) {
+            case 0:
+                holder.tvType.setText ("PAIRED");
+                break;
+            case 1:
+                holder.tvType.setText ("NOT PAIRED");
+                holder.tvRSSI.setText ("RSSI : " + device.getRssi () + "dbm");
+                holder.tvRSSI.setVisibility (View.VISIBLE);
+                break;
+        }
+        holder.tvState.setText (device.getState ());
     }
 
     @Override
@@ -60,12 +69,16 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         TextView tvName;
         TextView tvAddress;
         TextView tvType;
-
+        TextView tvState;
+        TextView tvRSSI;
+    
         public ViewHolder (View view) {
             super (view);
             tvName = (TextView) view.findViewById (R.id.tvName);
             tvAddress = (TextView) view.findViewById (R.id.tvAddress);
             tvType = (TextView) view.findViewById (R.id.tvType);
+            tvState = (TextView) view.findViewById (R.id.tvState);
+            tvRSSI = (TextView) view.findViewById (R.id.tvRSSI);
             view.setOnClickListener (this);
         }
         

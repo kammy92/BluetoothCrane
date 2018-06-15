@@ -40,4 +40,28 @@
         android:text="Paired"
         android:textColor="@color/secondary_text"
         android:textSize="@dimen/text_size_extra_small"/>
+    <TextView
+        android:id="@+id/tvState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvType"
+        android:layout_marginLeft="@dimen/activity_margin_small"
+        android:layout_marginStart="@dimen/activity_margin_small"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="State"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/text_size_extra_small"/>
+    <TextView
+        android:id="@+id/tvRSSI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvState"
+        android:layout_marginLeft="@dimen/activity_margin_small"
+        android:layout_marginStart="@dimen/activity_margin_small"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="RSSI"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/text_size_extra_small"/>
 </RelativeLayout>
